@@ -18,7 +18,7 @@ This is a dashboard / website for a Cardano ADA Stake Pool that uses Jormanager 
 
 I've done my best to comment the code so that its accessable to anybody. If you're running Jormanager already this should be pretty much plug and play. If you're not using Jormanager then this is not going to work for you. Some of the data will still be available, but some wont. 
 
-The CSS framework used is [Materialize CSS](https://materializecss.com/), I also use jQuery to initialize Materialize javascript functions (though you could just use regular javascript if you wanted, thats on you). 
+The CSS framework used is [Materialize CSS](https://materializecss.com/), I also use jQuery to initialize Materialize javascript functions (though you could just use regular javascript if you wanted, thats on you). I also include some Google fonts so feel free to change those to your liking as well. 
 
 One last thing, under the contact menu there is no contact form included. You will have to provide that yourself since everyone is different in how they like their forms to be configured, I've left that up to you.  
 
