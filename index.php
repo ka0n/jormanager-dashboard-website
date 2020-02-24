@@ -1,14 +1,12 @@
 
 <?php 
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
-//
-// A GENERIC TEMPLATE FOR A STAKE POOL WEBSITE THAT USES JORMANAGER
-// 
-// REQUIREMENTS: PHP
-// REQUIREMENTS: JORMANAGER (https://bitbucket.org/muamw10/jormanager/)
-//
-//
+/********
+
+
+
+
+
+**********/
 
 
 // COUNTERS
@@ -28,19 +26,36 @@ $networkType		= "Incentivized Testnet";
 $poolTax			= "2%";
 $poolFees			= "0";
 $poolTicker			= "COCO";
-$networkLastHash 	= "#";
+
+// CONTACT INFO
+$poolTwitter		= "COCONUT_POOL";
+$poolTelegram		= "COCONUT_POOL";
+
+// POOL NAME
 $siteTitle			= "COCONUT POOL";
 $siteSlogan			= "A Cardano ADA Stake Pool";
-$apiPort			= "5000";
-$fqdn				= "coconutpool.com";
 
-// SHELLEY EXPLORER
-$shelley = "https://shelleyexplorer.cardano.org/en/block";
+// API PORT
+$apiPort			= "5000";
+
+// YOUR DOMAIN NAME
+$fqdn				= "coconutpool.com";
 
 // CREATED BY JORMANAGER
 // SET PATH, DO NOT START WITH A "/" 
 $jmblocks			= "blocks.json";
 $jmstats 			= "jormanager-stats.json";
+///////// END CUSTOMIZE /////////////////
+
+
+// NOT AVAILABLE AT THE CURRENT TIME
+$networkLastHash 	= "#";
+
+
+// SHELLEY EXPLORER
+$shelley = "https://shelleyexplorer.cardano.org/en/block";
+
+		
 
 // POOL DATA: BLOCKS
 // SOURCE: JORMANAGER
@@ -53,6 +68,15 @@ curl_close($finit);
 
 $blockJSON		= json_decode($blockSource, true);
 
+// LEADER SLOTS TODAY
+foreach ($blockJSON as $blockData) {
+ 	if ($blockData['status'] == 'Pending') {
+ 		$l++;
+ 	}
+}
+
+$leadersToday	= $l;
+
 // NODE STATUS
 // SOURCE: JORMANAGER
 
@@ -64,15 +88,6 @@ $nodeSource  = curl_exec($fsinit);
 curl_close($fsinit);
 
 $nodeJSON		= json_decode($nodeSource, true);
-
-// LEADER SLOTS TODAY
-foreach ($blockJSON as $blockData) {
- 	if ($blockData['status'] == 'Pending') {
- 		$l++;
- 	}
-}
-
-$leadersToday	= $l;
 
 
 // POOL DATA: STAKE
@@ -135,11 +150,16 @@ $chainHeight 	= $pooltoolJSON['majoritymax'];
 
 
 // DATE 
-$currentEpoch 	= round($localStatsJSON['lastBlockDate']);
+if (substr($localStatsJSON['lastBlockDate'], 0,2) <= "99") {
+	$currentEpoch 	= substr($localStatsJSON['lastBlockDate'], 0,2);
+}
+else {
+	$currentEpoch 	= substr($localStatsJSON['lastBlockDate'], 0,3);
+}
+
 $currentSlot  	= substr($localStatsJSON['lastBlockDate'], 3);
 $totalSlots		= "43200";
 $currentProg	= round(($currentSlot/$totalSlots)*100);
-
 
 // TOTAL REWARDS
 // TOTAL TAXES COLLECTED
@@ -235,7 +255,7 @@ $nextEpoch = gmdate("H:i:s", $timeLeft);
 				<div id="about" class="modal">
 				    <div class="modal-content">
 				      	<h4 class="headline">ABOUT</h4>
-				      	<p> ... </p>
+				      	<p class="content">Coconut Pool is a Cardano ADA staking pool.</p>
 				    </div>
 				    <div class="modal-footer">
 				      <a href="#!" class="modal-close btn-flat">CLOSE</a>
@@ -246,7 +266,16 @@ $nextEpoch = gmdate("H:i:s", $timeLeft);
 				<div id="contact" class="modal">
 				    <div class="modal-content">
 				      	<h4 class="headline">CONTACT</h4>
-				      	<p> ... </p>
+				      	<table class="striped">
+				      		<tr>
+				      			<td width="15%"><p class="headline">Twitter:</p></td>
+				      			<td width="85%"><p class="content"><a href="http://twitter.com/<?php echo $poolTwitter; ?>" target="_blank">@<?php echo $poolTwitter; ?></a></p></td>
+				      		</tr>
+				      		<tr>
+				      			<td width="15%"><p class="headline">Telegram:</p></td>
+				      			<td width="85%"><p class="content"><a href="http://t.me/<?php echo $poolTelegram; ?>" target="_blank">@<?php echo $poolTelegram; ?></a></p></td>
+				      		</tr>
+				      	</table>
 				    </div>
 				    <div class="modal-footer">
 				      <a href="#!" class="modal-close btn-flat">CLOSE</a>
@@ -257,7 +286,33 @@ $nextEpoch = gmdate("H:i:s", $timeLeft);
 				 <div id="hardware" class="modal">
 				    <div class="modal-content">
 				      	<h4 class="headline">HARDWARE</h4>
-				      <p> ... </p>
+				      	<table class="striped">
+			      		<tr>
+			      			<td class="headline">TYPE:</td>
+			      			<td class="content">DEDICATED</td>
+			      		</tr>
+			      		<tr>
+			      			<td class="headline">SYSTEM:</td>
+			      			<td class="content">UBUNTU 18.04.4</td>
+			      		</tr>
+			      		<tr>
+			      			<td class="headline">PROCESSOR:</td>
+			      			<td class="content">XEON E3-1270v6</td>
+			      		</tr>
+			      		<tr>
+			      			<td class="headline">MEMORY:</td>
+			      			<td class="content">32GB DDR4</td>
+			      		</tr>
+			      		<tr>
+			      			<td class="headline">DISK:</td>
+			      			<td class="content">2x450GB SSD NVMe SoftRAID</td>
+			      		</tr>
+			      		<tr>
+			      			<td class="headline">BANDWIDTH:</td>
+			      			<td class="content">500Mbps UNMETERED UP/DOWN</td>
+			      		</tr>
+
+			      		</table>
 				    </div>
 				    <div class="modal-footer">
 				      <a href="#!" class="modal-close btn-flat">CLOSE</a>
@@ -391,7 +446,7 @@ $nextEpoch = gmdate("H:i:s", $timeLeft);
 
 						<!-- ITEM -->
 						<div class="col s6 m6 headline">LOCAL LAST HASH</div>
-						<div class="col s6 m6"><a href='<?php echo $shelley . "/" . $localLastHash; ?>'><?php echo substr($localLastHash, 0,16); ?></a></div>
+						<div class="col s6 m6"><a href='<?php echo $shelley . "/" . $localLastHash; ?>' target="_blank"><?php echo substr($localLastHash, 0,16); ?></a></div>
 
 						
 
@@ -529,7 +584,9 @@ $nextEpoch = gmdate("H:i:s", $timeLeft);
 						<!-- CHAIN HEIGHT -->
 						<div class="col s3 m2">
 							
-							<div class="col s12 m12 square graybg"><?php echo $nodes['lastBlockHeight']; ?></div>
+							<div class="col s12 m12 square graybg">
+								<a href="<?php echo $shelley . '/' . $nodes['lastBlockHash']; ?>" target="_blank"><?php echo $nodes['lastBlockHeight']; ?></a>
+							</div>
 						
 						</div>
 
