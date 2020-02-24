@@ -407,7 +407,7 @@ $nextEpoch = gmdate("H:i:s", $timeLeft);
 						<!-- NODE ID -->
 						<div class="col s3">
 							
-								<div class="col s12 square pumpkin headline">JMGR</div>
+								<div class="col s12 square pumpkin headline">NODE</div>
 							
 						</div>
 
