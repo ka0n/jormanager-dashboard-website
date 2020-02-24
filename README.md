@@ -14,8 +14,8 @@ You'll need to configure Jormanager to write its JSON files to whatever director
 
 ### FILES:
 
-index.php -- The main site.
-style.css -- Additional styles and colors. 
+* index.php -- The main site.
+* style.css -- Additional styles and colors. 
 
 ### DESCRIPTION:
 
