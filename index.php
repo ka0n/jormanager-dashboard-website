@@ -1,12 +1,19 @@
 
 <?php 
-/********
-
-
-
-
-
-**********/
+//
+//
+// PREREQUISITS:
+// - Jormanager
+// - PHP w/cURL extension
+//
+// NOTES:
+// - You'll need to configure Jormanager to write its JSON files to whatever directory your website lives in.
+//
+// FILES:
+// - index.php -- The main site.
+// - style.css -- Additional styles and colors.
+//
+//
 
 
 // COUNTERS
