@@ -6,7 +6,7 @@ This is a template for a stake pool website that doubles as a dashboard for [Jor
 ### PREREQUISITS:
 
 * [Jormanager](https://bitbucket.org/muamw10/jormanager/src/develop/)
-* PHP w/CURL extension
+* PHP w/cURL extension
 
 ### NOTES:
 
