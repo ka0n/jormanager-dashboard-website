@@ -44,3 +44,7 @@ You can see it in action on my site: [Coconut Pool](https://coconutpool.com)
 If you like it, put some ₳ in it: 
 
 DdzFFzCqrhsimosXs37Lz1aGs3pbYjD3CzLuQYUagnTzT3GjK9vvrdxsArDBgHT1BNnGqCht4aMRangofWtr7zD5PA9JvEvr3wz6Jbxs
+
+### CHANGE LOG:
+
+022020: Bug fix: Epoch was showing wrong number.
