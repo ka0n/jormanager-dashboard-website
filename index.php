@@ -337,7 +337,7 @@ $nextEpoch = gmdate("H:i:s", $timeLeft);
 						
 						<!-- ITEM -->
 						<div class="col s6 m6 headline">LIVE STAKE</div>
-						<div class="col s6 m6 content">₳ <?php echo $liveStake; ?> ADA</div>
+						<div class="col s6 m6 content">₳ <?php echo $liveStake; ?></div>
 
 						<!-- ITEM -->
 						<div class="col s6 m6 headline">DELEGATORS</div>
@@ -346,11 +346,11 @@ $nextEpoch = gmdate("H:i:s", $timeLeft);
 
 						<!-- ITEM -->
 						<div class="col s6 m6 headline">TOTAL REWARDS</div>
-						<div class="col s6 m6 content">₳ <?php echo $totalRewards; ?> ADA</div>
+						<div class="col s6 m6 content">₳ <?php echo $totalRewards; ?></div>
 
 						<!-- ITEM -->
 						<div class="col s6 m6 headline">TOTAL TAXES</div>
-						<div class="col s6 m6 content">₳ <?php echo $totalTaxes; ?> ADA</div>
+						<div class="col s6 m6 content">₳ <?php echo $totalTaxes; ?></div>
 
 						<!-- ITEM -->
 						<div class="col s6 m6 headline">LEADERSHIP TODAY</div>
