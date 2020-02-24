@@ -27,3 +27,15 @@ One last thing, under the contact menu there is no contact form included. You wi
 ### EXAMPLE: 
 
 You can see it in action on my site: [Coconut Pool](https://coconutpool.com)
+
+### COPYRIGHT:
+
+MIT License
+Please fork, update & fix as you feel necessary. 
+Please Leave the link to JON_MADE_THIS in the footer.
+
+### DONATIONS:
+
+If you like it, put some ADA in it: 
+
+₳(coming soon)
