@@ -1,0 +1,101 @@
+/* COLORS */
+
+.whitebg {
+	background-color: #f7f1e3;
+}
+
+.orangebg {
+	background-color: #ffb142;
+}
+
+.dijonbg {
+	background-color: #ffda79;
+}
+
+.bronzebg {
+	background-color: #ccae62;
+}
+
+.graybg {
+	background-color: #aaa69d;
+}
+
+.darkgraybg {
+	background-color: #84817a;
+}
+
+.stopped {
+	background-color: #ff5252;
+}
+
+.pumpkin {
+	background-color: #ff793f;
+}
+
+.running {
+	background-color: #218c74;
+}
+
+.leadership {
+	background-color: #227093;
+}
+
+.bootstrap {
+	background-color: #cc8e35;
+}
+
+.lightyellowbg {
+	background-color: #F8EFBA;
+}
+/* FONTS */
+
+.logo {
+	font-family: 'Itim';
+	font-size: 48pt;
+	color: #2d3436;
+}
+
+.headline {
+	font-family: 'Francois One';
+	color: #2d3436;
+}
+
+.content {
+	font-family: 'News Cycle';
+	color: #2d3436;
+}
+
+.eightteen {
+	font-size: 18px;
+	color: #2d3436;
+}
+
+/* LINKS*/
+
+a:link {
+  color: #2c2c54;
+}
+
+a:visited {
+  color:  #2c2c54;
+}
+
+a:hover {
+  color: #ff5252;
+}
+
+a:active {
+  color: #2c2c54;
+}
+
+/* SHAPES */
+
+.square {
+	width:60px;
+	height:60px;
+	line-height:60px;
+	text-align:center;
+	color: #2d3436;
+	
+}
+
