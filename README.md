@@ -35,9 +35,9 @@ You can see it in action on my site: [Coconut Pool](https://coconutpool.com)
 
 ### COPYRIGHT:
 
-MIT License
-Please fork, update & fix as you feel necessary. 
-Please Leave the link to JON_MADE_THIS in the footer.
+* MIT License
+* Please fork, fix & update as you feel necessary. 
+* Please leave the link to JON_MADE_THIS in the footer.
 
 ### DONATIONS:
 
