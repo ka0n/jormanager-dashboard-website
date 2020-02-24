@@ -12,6 +12,11 @@ This is a template for a stake pool website that doubles as a dashboard for [Jor
 
 You'll need to configure Jormanager to write its JSON files to whatever directory your website lives in. 
 
+### FILES:
+
+index.php -- The main site.
+style.css -- Additional styles and colors. 
+
 ### DESCRIPTION:
 
 This is a dashboard / website for a Cardano ADA Stake Pool that uses Jormanager to manage the Jormungandr node. The dashboard gets its data from a variety of sources, your local nodes API, [PoolTool](http://pooltool.io), and Jormanager. I try to present a good overview of the state of the node, pool and network by including as many relevant statistics as possible about each.
