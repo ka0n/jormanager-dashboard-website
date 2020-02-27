@@ -33,7 +33,7 @@ $poolTicker		= "COCO";
 $poolTwitter		= "COCONUT_POOL";
 $poolTelegram		= "COCONUT_POOL";
 $poolTelegramChan	= "COCONUTPOOLSTAKERSLOUNGE";
-
+ 
 // POOL NAME
 $siteTitle			= "COCONUT POOL";
 $siteSlogan			= "A Cardano ADA Stake Pool";
