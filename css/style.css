@@ -1,91 +1,133 @@
-/* COLORS */
+/**** COLORS ****/
 
-.whitebg {
-	background-color: #f7f1e3;
+.header {
+	background-color: #2d3436;
 }
 
-.orangebg {
-	background-color: #ffb142;
+.statistics {
+	background-color: #636e72;
 }
 
-.dijonbg {
-	background-color: #ffda79;
+.legend {
+	background-color: #b2bec3;
 }
 
-.bronzebg {
-	background-color: #ccae62;
+.modalbg {
+	background-color: #2d3436;
 }
 
-.graybg {
-	background-color: #aaa69d;
+.modalfooter {
+	background-color: #636e72;
 }
 
-.darkgraybg {
-	background-color: #84817a;
+.data {
+	background-color: #dfe6e9;
 }
 
-.stopped {
-	background-color: #ff5252;
+.disclaimer {
+	background-color: #74b9ff;
 }
 
-.pumpkin {
-	background-color: #ff793f;
+.footer {
+	background-color: #0984e3;
+}
+
+.block {
+	/* background-color: #aaa69d; */
+	background-color: #e17055;
+
+}
+
+
+/**** NODE STATUS ********/
+
+.node {
+	background-color: #6c5ce7;
+	color: #2d3436;
+	font-size: 14px;
 }
 
 .running {
-	background-color: #218c74;
+  	background-color: #00b894;
+  	color: #2d3436;
+	font-size: 14px;
+
+}
+
+.stopped {
+	background-color: #d63031;
+	color: #2d3436;
+	font-size: 14px;
 }
 
 .leadership {
-	background-color: #227093;
+	background-color: #e84393;
+	color: #2d3436;
+	font-size: 14px;
+}
+
+.passive {
+	background-color: #fd79a8;
+	color: #2d3436;
+	font-size: 14px;
 }
 
 .bootstrap {
-	background-color: #cc8e35;
+	background-color: #fdcb6e;
+	color: #2d3436;
+	font-size: 14px;
 }
 
-.lightyellowbg {
-	background-color: #F8EFBA;
-}
-/* FONTS */
+
+/********** FONTS ***********/
 
 .logo {
-	font-family: 'Itim';
-	font-size: 48pt;
-	color: #2d3436;
+	font-family: 'Francois One';
+	color: #dfe6e9;
+	font-size: 60px;
 }
 
 .headline {
 	font-family: 'Francois One';
-	color: #2d3436;
+	color: #dfe6e9;
+	font-size: 48px;
 }
+
+
+.title {
+	font-family: 'Francois One';
+	color: #dfe6e9;
+	font-size: 14px;
+}
+
 
 .content {
 	font-family: 'News Cycle';
-	color: #2d3436;
+	font-size: 14px;
+	color: #dfe6e9;
 }
 
-.eightteen {
-	font-size: 18px;
-	color: #2d3436;
-}
 
 /* LINKS*/
 
 a:link {
-  color: #2c2c54;
+  color: #f7f1e3;
+  font-size: 14px;
 }
 
 a:visited {
-  color:  #2c2c54;
+  color:  #f7f1e3;
+  font-size: 14px;
 }
 
 a:hover {
   color: #ff5252;
+  font-size: 14px;
 }
 
 a:active {
-  color: #2c2c54;
+  color: #f7f1e3;
+  font-size: 14px;
 }
 
 /* SHAPES */
@@ -95,7 +137,5 @@ a:active {
 	height:60px;
 	line-height:60px;
 	text-align:center;
-	color: #2d3436;
-	
 }
 
