@@ -1,17 +1,12 @@
 
 <?php 
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
 //
-//
-// PREREQUISITS:
-// - Jormanager
-// - PHP w/cURL extension
-//
-// NOTES:
-// - You'll need to configure Jormanager to write its JSON files to whatever directory your website lives in.
-//
-// FILES:
-// - index.php -- The main site.
-// - style.css -- Additional styles and colors.
+// A GENERIC TEMPLATE FOR A STAKE POOL WEBSITE THAT USES JORMANAGER
+// 
+// REQUIREMENTS: PHP
+// REQUIREMENTS: JORMANAGER (https://bitbucket.org/muamw10/jormanager/)
 //
 //
 
@@ -22,14 +17,14 @@ $d = 0; // deletegators
 $e = 0; // epochs
 $l = 0; // leaders
 $n = 1; // nodes
-
+$f = 0; // false minted blocks
 
 // POOL SETTINGS
 // CUSTOMIZE THIS SECTION
 $poolFees 			= "0";
 $poolTax 			= "2";
 $poolID				= "bd190d24622cf29094149258431fe5f8d06b810e649325c176356dbf95970422";
-$networkType		= "Incentivized Testnet";
+$networkType			= "INCENTIVIZED TESTNET";
 $poolTax			= "2%";
 $poolFees			= "0";
 $poolTicker			= "COCO";
@@ -37,6 +32,7 @@ $poolTicker			= "COCO";
 // CONTACT INFO
 $poolTwitter		= "COCONUT_POOL";
 $poolTelegram		= "COCONUT_POOL";
+$poolTelegramChan	= "COCONUTPOOLSTAKERSLOUNGE";
 
 // POOL NAME
 $siteTitle			= "COCONUT POOL";
@@ -52,6 +48,16 @@ $fqdn				= "coconutpool.com";
 // SET PATH, DO NOT START WITH A "/" 
 $jmblocks			= "blocks.json";
 $jmstats 			= "jormanager-stats.json";
+
+// SERVER HARDWARE 
+$serverType			= "DEDICATED"; // dedicated, vps, vm, etc.
+$serverOS			= "UBUNTU 18.04.4"; // operating system
+$serverCPU			= "XEON E3-1270v6"; // cpu type
+$serverMem			= "32GB DDR4"; // ram
+$serverBand			= "500Mbps UNMETERED UP/DOWN"; // network bandwidth
+$serverHD			= "2x450GB SSD NVMe SoftRAID"; // disk space
+
+
 ///////// END CUSTOMIZE /////////////////
 
 
@@ -64,25 +70,7 @@ $shelley = "https://shelleyexplorer.cardano.org/en/block";
 
 		
 
-// POOL DATA: BLOCKS
-// SOURCE: JORMANAGER
-$finit 	= curl_init();
-$furl 	= "https://" . $fqdn . "/" . $jmblocks;
-curl_setopt($finit, CURLOPT_URL, $furl);
-curl_setopt($finit, CURLOPT_RETURNTRANSFER, true);
-$blockSource  = curl_exec($finit);
-curl_close($finit);
 
-$blockJSON		= json_decode($blockSource, true);
-
-// LEADER SLOTS TODAY
-foreach ($blockJSON as $blockData) {
- 	if ($blockData['status'] == 'Pending') {
- 		$l++;
- 	}
-}
-
-$leadersToday	= $l;
 
 // NODE STATUS
 // SOURCE: JORMANAGER
@@ -107,6 +95,35 @@ $liveSource = curl_exec($lsinit);
 curl_close($lsinit);
 
 $liveJSON		= json_decode($liveSource, true);
+$liveStake 		= number_format(round($liveJSON['livestake']*0.000001));
+$lifetimeBlocks	= $liveJSON['lifetimeblocks'];
+
+
+// POOL DATA: BLOCKS
+// SOURCE: JORMANAGER
+$finit 	= curl_init();
+$furl 	= "https://" . $fqdn . "/" . $jmblocks;
+curl_setopt($finit, CURLOPT_URL, $furl);
+curl_setopt($finit, CURLOPT_RETURNTRANSFER, true);
+$blockSource  = curl_exec($finit);
+curl_close($finit);
+
+$blockJSON		= json_decode($blockSource, true);
+
+// LEADER SLOTS TODAY
+foreach ($blockJSON as $blockData) {
+ 	if ($blockData['status'] == 'Pending') {
+ 		$l++;
+ 	}
+ 	if (!$blockData['minted'] == 'false') {
+ 		$f++;
+ 		$ff = $f-$l;
+ 	}
+}
+
+$leadersFail		= $ff;
+$leadersToday		= $l;
+$leadersTotalTotal	= $lifetimeBlocks+$leadersFail;
 
 // POOL DATA: DELEGATORS
 // SOURCE: POOLTOOL.IO OPERATORS DATA
@@ -125,9 +142,7 @@ foreach ($delegateJSON['d'] as $delegator) {
 
 $totalDelegators = $d;
 
-// POOL DATA: STATISTICS
-$liveStake 		= number_format(round($liveJSON['livestake']*0.000001));
-$lifetimeBlocks	= $liveJSON['lifetimeblocks'];
+
 
 // POOL DATA: LOCAL STATS
 // SOURCE: LOCAL NODE
@@ -165,7 +180,7 @@ else {
 }
 
 $currentSlot  	= substr($localStatsJSON['lastBlockDate'], 3);
-$totalSlots		= "43200";
+$totalSlots	= "43200";
 $currentProg	= round(($currentSlot/$totalSlots)*100);
 
 // TOTAL REWARDS
@@ -181,13 +196,13 @@ for ($e = 0; $e <= $currentEpoch; $e++) {
 	$rewardsSource = curl_exec($rinit);
 	curl_close($rinit);
 	
-	$rewardsJSON   		= json_decode($rewardsSource, true);
-    $valueForStakers 	+= $rewardsJSON['rewards']['value_for_stakers'];
-    $valueTaxed 		+= $rewardsJSON['rewards']['value_taxed'];
+    	$rewardsJSON   		= json_decode($rewardsSource, true);
+    	$valueForStakers 	+= $rewardsJSON['rewards']['value_for_stakers'];
+    	$valueTaxed 		+= $rewardsJSON['rewards']['value_taxed'];
 }
 
-$totalRewards 	= round(($valueForStakers*0.000001)*0.3);
-$totalTaxes 	= round(($valueTaxed*0.000001)*0.3);   
+$totalRewards 	= number_format(round(($valueForStakers*0.000001)*0.3));
+$totalTaxes 	= number_format(round(($valueTaxed*0.000001)*0.3));   
 
 // EPOCH COUNTDOWN
 strtotime('today 19:13:37');
@@ -280,7 +295,7 @@ $nextEpoch = gmdate("H:i:s", $timeLeft);
 				      		</tr>
 				      		<tr>
 				      			<td width="15%"><p class="headline">Telegram:</p></td>
-				      			<td width="85%"><p class="content"><a href="http://t.me/<?php echo $poolTelegram; ?>" target="_blank">@<?php echo $poolTelegram; ?></a></p></td>
+				      			<td width="85%"><p class="content"><a href="http://t.me/<?php echo $poolTelegramChan; ?>" target="_blank">@<?php echo $poolTelegramChan; ?></a></p></td>
 				      		</tr>
 				      	</table>
 				    </div>
@@ -296,27 +311,27 @@ $nextEpoch = gmdate("H:i:s", $timeLeft);
 				      	<table class="striped">
 			      		<tr>
 			      			<td class="headline">TYPE:</td>
-			      			<td class="content">DEDICATED</td>
+			      			<td class="content"><?php echo $serverType; ?></td>
 			      		</tr>
 			      		<tr>
 			      			<td class="headline">SYSTEM:</td>
-			      			<td class="content">UBUNTU 18.04.4</td>
+			      			<td class="content"><?php echo $serverOS; ?></td>
 			      		</tr>
 			      		<tr>
 			      			<td class="headline">PROCESSOR:</td>
-			      			<td class="content">XEON E3-1270v6</td>
+			      			<td class="content"><?php echo $serverCPU; ?></td>
 			      		</tr>
 			      		<tr>
 			      			<td class="headline">MEMORY:</td>
-			      			<td class="content">32GB DDR4</td>
+			      			<td class="content"><?php echo $serverMem; ?></td>
 			      		</tr>
 			      		<tr>
 			      			<td class="headline">DISK:</td>
-			      			<td class="content">2x450GB SSD NVMe SoftRAID</td>
+			      			<td class="content"><?php echo $serverHD; ?></td>
 			      		</tr>
 			      		<tr>
 			      			<td class="headline">BANDWIDTH:</td>
-			      			<td class="content">500Mbps UNMETERED UP/DOWN</td>
+			      			<td class="content"><?php echo $serverBand; ?></td>
 			      		</tr>
 
 			      		</table>
@@ -336,47 +351,76 @@ $nextEpoch = gmdate("H:i:s", $timeLeft);
 					<div class="col s12 m4">
 						<h2 class="headline">EPOCH</h2>
 
-						<!-- ITEM -->
+						<!-- ITEM 1-->
 						<div class="col s6 m6 headline">CURRENT EPOCH</div>
 						<div class="col s6 m6 content">
-							<?php echo $currentEpoch; ?>
+							<?php
+
+							 if ( $currentEpoch == "") {
+							 	echo "Bootstrapping..";
+							 }
+							 else {
+							 	echo $currentEpoch; 
+							 }
+
+							 ?>
 						</div>
 
-						<!-- ITEM -->
+						<!-- ITEM 2-->
 						<div class="col s6 m6 headline">CURRENT SLOT</div>
 						<div class="col s6 m6 content">
-							<?php echo $currentSlot; ?>
+							<?php
+
+							 if ( $currentSlot == "") {
+							 	echo "Bootstrapping..";
+							 }
+							 else {
+							 	echo $currentSlot;
+							 }
+
+							 ?>
+							
 						</div>
 
-						<!-- ITEM -->
+						<!-- ITEM 3-->
 						<div class="col s6 m6 headline">TOTAL SLOTS</div>
 						<div class="col s6 m6 content">
 							<?php echo $totalSlots; ?>
 						</div>
 
 
-						<!-- ITEM -->
+						<!-- ITEM 4-->
 						<div class="col s6 m6 headline">PERCENT COMPLETE</div>
 						<div class="col s6 m6 content">
-							<?php echo $currentProg; ?>%
+							<?php
+
+							 if ( $currentProg == "") {
+							 	echo "Bootstrapping..";
+							 }
+							 else {
+							 	echo $currentProg;
+							 }
+
+							 ?>
+							
 						</div>
 
-						<!-- ITEM -->
+
+						<!-- ITEM 8-->
+						<div class="col s6 m6 headline">LEADERSHIP REMAINING</div>
+						<div class="col s6 m6 content"><?php echo $leadersToday; ?></div>
+
+						<!-- ITEM 9-->
+						<div class="col s6 m6 headline">LEADERSHIP TOTAL</div>
+						<div class="col s6 m6 content"><?php echo $lifetimeBlocks; ?></div>
+
+						<!-- ITEM 5-->
 						<div class="col s6 m6 headline">TIME TO NEXT EPOCH</div>
 						<div class="col s6 m6"><?php echo $nextEpoch; ?></div>
 
-						<!-- ITEM -->
-						<div class="col s6 m6 headline">&nbsp;</div>
-						<div class="col s6 m6">&nbsp;</div>
+					
 
-						<!-- ITEM -->
-						<div class="col s6 m6 headline">&nbsp;</div>
-						<div class="col s6 m6">&nbsp;</div>
-
-						<!-- ITEM -->
-						<div class="col s6 m6 headline">&nbsp;</div>
-						<div class="col s6 m6">&nbsp;</div>
-
+						
 					</div>
 				</article>
 
@@ -385,42 +429,71 @@ $nextEpoch = gmdate("H:i:s", $timeLeft);
 					<div class="col s12 m4">
 						<h2 class="headline">POOL</h2>
 
-						<!-- ITEM -->
+						<!-- ITEM 1-->
 						<div class="col s6 m6 headline">TICKER</div>
 						<div class="col s6 m6"><?php echo $poolTicker; ?></div>
 
-						<!-- ITEM -->
+						<!-- ITEM 2-->
 						<div class="col s6 m6 headline">TAX</div>
 						<div class="col s6 m6"><?php echo $poolTax; ?></div>
 
-						<!-- ITEM -->
+						<!-- ITEM 3-->
 						<div class="col s6 m6 headline">FEES</div>
 						<div class="col s6 m6">₳ <?php echo $poolFees; ?></div>
 						
-						<!-- ITEM -->
+						<!-- ITEM 4-->
 						<div class="col s6 m6 headline">LIVE STAKE</div>
-						<div class="col s6 m6 content">₳ <?php echo $liveStake; ?></div>
+						<div class="col s6 m6 content">
+							<?php
+								if ($liveStake == "") {
+									echo "Bootstrapping..";
+								}
+								else {
+									echo '₳ ' . $liveStake; 
+								}
+							?> 
+						</div>
 
-						<!-- ITEM -->
+						<!-- ITEM 5-->
 						<div class="col s6 m6 headline">DELEGATORS</div>
-						<div class="col s6 m6 content"><?php echo $totalDelegators; ?></div>
+						<div class="col s6 m6 content">
+							<?php
+								if ($totalDelegators == "") {
+									echo "Bootstrapping..";
+								}
+								else {
+									echo $totalDelegators; 
+								}
+							?> 
+						</div>
 
 
-						<!-- ITEM -->
+						<!-- ITEM 6-->
 						<div class="col s6 m6 headline">TOTAL REWARDS</div>
-						<div class="col s6 m6 content">₳ <?php echo $totalRewards; ?></div>
+						<div class="col s6 m6 content">
+							<?php
+								if ($totalRewards == "0") {
+									echo "Bootstrapping..";
+								}
+								else {
+									echo '₳ ' . $totalRewards; 
+								}
+							?> 
+						</div>
 
-						<!-- ITEM -->
+						<!-- ITEM 7-->
 						<div class="col s6 m6 headline">TOTAL TAXES</div>
-						<div class="col s6 m6 content">₳ <?php echo $totalTaxes; ?></div>
+						<div class="col s6 m6 content">
+								<?php
+								if ($totalTaxes == "0") {
+									echo "Bootstrapping..";
+								}
+								else {
+									echo '₳ ' . $totalTaxes; 
+								}
+							?> 
+							</div>
 
-						<!-- ITEM -->
-						<div class="col s6 m6 headline">LEADERSHIP TODAY</div>
-						<div class="col s6 m6 content"><?php echo $leadersToday; ?></div>
-
-						<!-- ITEM -->
-						<div class="col s6 m6 headline">LEADERSHIP TOTAL</div>
-						<div class="col s6 m6 content"><?php echo $lifetimeBlocks; ?></div>
 
 					</div>
 				</article>
@@ -430,32 +503,57 @@ $nextEpoch = gmdate("H:i:s", $timeLeft);
 					<div class="col s12 m4">
 						<h2 class="headline">NETWORK</h2>
 
-						<!-- ITEM -->
+						<!-- ITEM 1-->
 						<div class="col s6 m6 headline">NETWORK</div>
 						<div class="col s6 m6 content"><?php echo $networkType; ?></div>
 
 
-						<!-- ITEM -->
+						<!-- ITEM 2-->
 						<div class="col s6 m6 headline">CLIENT</div>
 						<div class="col s6 m6 content"><?php echo $networkClient; ?></div>
 						
-						<!-- ITEM -->
+						<!-- ITEM 3-->
 						<div class="col s6 m6 headline">NETWORK CHAIN HEIGHT</div>
 						<div class="col s6 m6 content"><?php echo $chainHeight; ?></div>
 
-						<!-- ITEM -->
+						<!-- ITEM 4-->
 						<div class="col s6 m6 headline">NETWORK LAST HASH</div>
 						<div class="col s6 m6 content"><?php echo $networkLastHash; ?></div>
 
-						<!-- ITEM -->
+						<!-- ITEM 5-->
 						<div class="col s6 m6 headline">LOCAL CHAIN HEIGHT</div>
-						<div class="col s6 m6 content"><?php echo $localBlockHeight; ?></div>
+						<div class="col s6 m6 content">
+							<?php 
 
-						<!-- ITEM -->
+								if ($localBlockHeight == "") {
+									echo "Bootstrapping.."; 
+								}
+								else {
+									echo $localBlockHeight; 
+								}
+							?>
+						</div>
+
+						<!-- ITEM 6-->
 						<div class="col s6 m6 headline">LOCAL LAST HASH</div>
-						<div class="col s6 m6"><a href='<?php echo $shelley . "/" . $localLastHash; ?>' target="_blank"><?php echo substr($localLastHash, 0,16); ?></a></div>
+						<div class="col s6 m6 content">
+							<?php
+								if ($localLastHash == "") {
+									echo "Bootstrapping..";
+								}
+								else {
+									echo '<a href=' . $shelley . "/" . $localLastHash . ' target="_blank">' . substr($localLastHash, 0,16) . '</a>'; 
+								}
+							?>
+						</div>
 
+						<!-- ITEM 7-->
+						<div class="col s6 m6 headline">&nbsp;</div>
+						<div class="col s6 m6">&nbsp;</div>
 						
+				
+
+					
 
 					</div>
 				</article>
@@ -634,7 +732,7 @@ $nextEpoch = gmdate("H:i:s", $timeLeft);
 
 				<!-- COPYRIGHT -->
 				<div class="col s12 m12 darkgraybg">
-					<p class="headline center-align">&copy; 2020 <?php echo $siteTitle; ?> &middot; Design by <a href="http://instagram.com/jon_made_this" target="_blank">JON_MADE_THIS</a></p>
+					<p class="headline center-align">&copy; 2020 <a href="https://github.com/coconutpool/jormanager-dashboard-website" tagret="_blank">COCONUT POOL</a> &middot; Design by <a href="http://instagram.com/jon_made_this" target="_blank">JON_MADE_THIS</a></p>
 				</div>
 
 
