@@ -20,14 +20,14 @@ $n = 1; // nodes
 $f = 0; // false minted blocks
 
 // POOL SETTINGS
-// CUSTOMIZE THIS SECTION
-$poolFees 			= "0";
-$poolTax 			= "2";
-$poolID				= "bd190d24622cf29094149258431fe5f8d06b810e649325c176356dbf95970422";
+// CUSTOMIZE THIS SECTIOn
+$poolFees 		= "0";
+$poolTax 		= "2";
+$poolID			= "bd190d24622cf29094149258431fe5f8d06b810e649325c176356dbf95970422";
 $networkType		= "SHELLEY ITN";
-$poolTax			= "2%";
-$poolFees			= "0";
-$poolTicker			= "COCO";
+$poolTax		= "2%";
+$poolFees		= "0";
+$poolTicker		= "COCO";
 
 // CONTACT INFO
 $poolTwitter		= "COCONUT_POOL";
