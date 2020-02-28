@@ -1,0 +1,163 @@
+/**** BODY COLORS ****/
+/* FROM THE TOP OF THE PAGE GOING DOWN */
+
+.header {
+	background-color: #2c3e50;
+}
+
+.statistics {
+	background-color: #7f8c8d;
+}
+
+.legend {
+	background-color: #bdc3c7;
+}
+
+
+.data {
+	background-color: #ecf0f1; 
+}
+
+.disclaimer {
+	background-color:#9b59b6;
+}
+
+.footer {
+	background-color: #8e44ad;
+}
+
+/**** MODALS *****/
+
+.modalbg {
+	background-color: #2c3e50;
+}
+
+.modalfooter {
+	background-color: #7f8c8d;
+}
+
+
+
+/**** NODE COLORS ********/
+
+.node {
+	background-color: #e67e22;
+	color: #1e272e;
+	font-size: 14px;
+}
+
+.running {
+  	background-color: #27ae60;
+  	color: #1e272e;
+	font-size: 14px;
+
+}
+
+.bootstrap {
+	background-color: #f1c40f;
+	color: #1e272e;
+	font-size: 14px;
+}
+
+
+.stopped {
+	background-color: #e74c3c;
+	color: #1e272e;
+	font-size: 14px;
+}
+
+.leadership {
+	background-color: #2980b9;
+	color: #1e272e;
+	font-size: 14px;
+}
+
+.passive {
+	background-color: #34495e;
+	color: #1e272e;
+	font-size: 14px;
+}
+
+/****** BLOCKS *****/
+/* BLOCK IS THE GENERIC BLOCK FOR HIGHT, PEERS, UPTIME */
+/* BLOCKCONTENT/TITLE AND THE CONTENTS OF THE BLOCKS */
+
+.block {
+	background-color: #95a5a6;
+
+}
+
+.blockcontent {
+	font-family: 'News Cycle';
+	font-size: 14px;
+	color: #ecf0f1;
+}
+
+.blocktitle {
+	font-family: 'Francois One';
+	color: #ecf0f1;
+	font-size: 14px;
+}
+
+/* THE BLOCKS SHAPE */
+/* DONT CHANGE */
+
+.square {
+	width:60px;
+	height:60px;
+	line-height:60px;
+	text-align:center;
+}
+
+
+/********** FONTS ***********/
+
+.logo {
+	font-family: 'Francois One';
+	color: #dfe6e9;
+	font-size: 60px;
+}
+
+.headline {
+	font-family: 'Francois One';
+	color: #dfe6e9;
+	font-size: 48px;
+}
+
+
+.title {
+	font-family: 'Francois One';
+	color: #dfe6e9;
+	font-size: 14px;
+}
+
+
+.content {
+	font-family: 'News Cycle';
+	font-size: 14px;
+	color: #dfe6e9;
+}
+
+
+/******* LINKS *****/
+
+a:link {
+  	color: #ecf0f1;
+  	font-size: 14px;
+}
+
+a:visited {
+  	color:  #ecf0f1;
+  	font-size: 14px;
+}
+
+a:hover {
+  	color: #c0392b;
+  	font-size: 14px;
+}
+
+a:active {
+  	color: #ecf0f1;
+  	font-size: 14px;
+}
+
