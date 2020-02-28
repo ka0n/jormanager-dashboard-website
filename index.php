@@ -11,29 +11,25 @@
 //
 
 
-// COUNTERS
-// DO NOT CHANGE
-$d = 0; // deletegators
-$e = 0; // epochs
-$l = 0; // leaders
-$n = 1; // nodes
-$f = 0; // false minted blocks
+
 
 // POOL SETTINGS
-// CUSTOMIZE THIS SECTIOn
-$poolFees 		= "0";
-$poolTax 		= "2";
-$poolID			= "bd190d24622cf29094149258431fe5f8d06b810e649325c176356dbf95970422";
+// CUSTOMIZE THIS SECTION
+$poolFees 			= "0";
+$poolTax 			= "2";
+$poolID				= "bd190d24622cf29094149258431fe5f8d06b810e649325c176356dbf95970422";
 $networkType		= "SHELLEY ITN";
-$poolTax		= "2%";
-$poolFees		= "0";
-$poolTicker		= "COCO";
+$poolTax			= "2%";
+$poolFees			= "0";
+$poolTicker			= "COCO";
+
+// CSS THEME
+$theme 				= "classic"; // options: classic, flatty, frenchy, modern
 
 // CONTACT INFO
 $poolTwitter		= "COCONUT_POOL";
-$poolTelegram		= "COCONUT_POOL";
 $poolTelegramChan	= "COCONUTPOOLSTAKERSLOUNGE";
- 
+
 // POOL NAME
 $siteTitle			= "COCONUT POOL";
 $siteSlogan			= "A Cardano ADA Stake Pool";
@@ -57,20 +53,26 @@ $serverMem			= "32GB DDR4"; // ram
 $serverBand			= "500Mbps UNMETERED UP/DOWN"; // network bandwidth
 $serverHD			= "2x450GB SSD NVMe SoftRAID"; // disk space
 
+// NETWORK
+$totalSlots			= number_format("43200"); // number of total slots in an epoch
 
 ///////// END CUSTOMIZE /////////////////
 
 
-// NOT AVAILABLE AT THE CURRENT TIME
+// NOT AVAILABLE AT THE CURRENT TIME -- PLACEHOLDER
 $networkLastHash 	= "#";
 
 
 // SHELLEY EXPLORER
 $shelley = "https://shelleyexplorer.cardano.org/en/block";
 
-		
-
-
+// COUNTERS
+// DO NOT CHANGE
+$d = 0; // deletegators
+$e = 0; // epochs
+$l = 0; // leaders
+$n = 1; // nodes
+$f = 0; // false minted blocks
 
 // NODE STATUS
 // SOURCE: JORMANAGER
@@ -179,8 +181,7 @@ else {
 	$currentEpoch 	= substr($localStatsJSON['lastBlockDate'], 0,3);
 }
 
-$currentSlot  	= substr($localStatsJSON['lastBlockDate'], 3);
-$totalSlots		= "43200";
+$currentSlot  	= number_format(substr($localStatsJSON['lastBlockDate'], 3));
 $currentProg	= round(($currentSlot/$totalSlots)*100);
 
 // TOTAL REWARDS
@@ -201,8 +202,8 @@ for ($e = 0; $e <= $currentEpoch; $e++) {
     $valueTaxed 		+= $rewardsJSON['rewards']['value_taxed'];
 }
 
-$totalRewards 	= number_format(round(($valueForStakers*0.000001)*0.3));
-$totalTaxes 	= number_format(round(($valueTaxed*0.000001)*0.3));   
+$totalRewards 	= number_format(round(($valueForStakers*0.000001)*0.5));
+$totalTaxes 	= number_format(round(($valueTaxed*0.000001))*0.5);   
 
 // EPOCH COUNTDOWN
 strtotime('today 19:13:37');
@@ -229,7 +230,7 @@ $nextEpoch = gmdate("H:i:s", $timeLeft);
 	    <link href="https://fonts.googleapis.com/css?family=Itim|Francois+One|News+Cycle&display=swap" rel="stylesheet">
 
 	    <!-- CSS: COLORS & FONTS -->
-	    <link href="css/style.css" rel="stylesheet">
+	    <link href="css/<?php echo $theme; ?>.css" rel="stylesheet">
 
 
 		<!-- JS: JQUERY 3.4.1 -->
@@ -469,7 +470,7 @@ $nextEpoch = gmdate("H:i:s", $timeLeft);
 
 
 						<!-- ITEM 6-->
-						<div class="col s6 m6 title">TOTAL REWARDS</div>
+						<div class="col s6 m6 title">LIFETIME REWARDS</div>
 						<div class="col s6 m6 content">
 							<?php
 								if ($totalRewards == "0") {
@@ -482,7 +483,7 @@ $nextEpoch = gmdate("H:i:s", $timeLeft);
 						</div>
 
 						<!-- ITEM 7-->
-						<div class="col s6 m6 title">TOTAL TAXES</div>
+						<div class="col s6 m6 title">LIFETIME TAXES</div>
 						<div class="col s6 m6 content">
 								<?php
 								if ($totalTaxes == "0") {
@@ -567,26 +568,26 @@ $nextEpoch = gmdate("H:i:s", $timeLeft);
 						<!-- NODE ID -->
 						<div class="col s3">
 							
-								<div class="col s12 square node title">NODE</div>
+								<div class="col s12 square node blocktitle">NODE</div>
 							
 						</div>
 
 						<!-- STATE -->
 						<div class="col s3 m2">
-							<div class="col s6 square running title">RN</div>
-							<div class="col s6 square bootstrap title">BS</div>
+							<div class="col s6 square running blocktitle">RN</div>
+							<div class="col s6 square bootstrap blocktitle">BS</div>
 						</div>
 
 						<!-- LEADERSHIP -->
 						<div class="col s3 m2">
-							<div class="col s6 square leadership title">LD</div>
-							<div class="col s6 square title passive">PA</div>
+							<div class="col s6 square leadership blocktitle">LD</div>
+							<div class="col s6 square passive blocktitle">PA</div>
 						</div>
 
 						<!-- CHAIN HEIGHT -->
 						<div class="col s3">
 							
-							<div class="col s12 square block title">HT</div>
+							<div class="col s12 square block blocktitle">HT</div>
 						
 						</div>
 
@@ -599,40 +600,40 @@ $nextEpoch = gmdate("H:i:s", $timeLeft);
 						<!-- NODE ID -->
 						<div class="col m2">
 							
-								<div class="col m12 square node title">JORMUNGANDR</div>
+								<div class="col m12 square node blocktitle">JORMUNGANDR</div>
 							
 						</div>
 
 						<!-- STATE -->
 						<div class="col m2">
-							<div class="col m6 square running title">RUNNING</div>
-							<div class="col m6 square bootstrap title">BOOTSTRAP</div>
+							<div class="col m6 square running blocktitle">RUNNING</div>
+							<div class="col m6 square bootstrap blocktitle">BOOTSTRAP</div>
 						</div>
 
 						<!-- LEADERSHIP -->
 						<div class="col m2">
-							<div class="col m6 square leadership title">LEADER</div>
-							<div class="col m6 square title passive">PASSIVE</div>
+							<div class="col m6 square leadership blocktitle">LEADER</div>
+							<div class="col m6 square passive blocktitle">PASSIVE</div>
 						</div>
 
 						<!-- CHAIN HEIGHT -->
 						<div class="col m2">
 							
-							<div class="col m12 square block title">HEIGHT</div>
+							<div class="col m12 square block blocktitle">HEIGHT</div>
 						
 						</div>
 
 						<!-- PEERS -->
 						<div class="col m2">
 							
-							<div class="col m12 square block title">PEERS</div>
+							<div class="col m12 square block blocktitle">PEERS</div>
 							
 						</div>
 
 						<!-- UPTIME -->
 						<div class="col m2">
 							
-							<div class="col m12 square block title">UPTIME</div>
+							<div class="col m12 square block blocktitle">UPTIME</div>
 							
 						</div>
 					</div>
@@ -652,7 +653,7 @@ $nextEpoch = gmdate("H:i:s", $timeLeft);
 						<!-- NODE ID -->
 						<div class="col s3 m2">
 							
-								<div class="col s12 m12 square node title content"><?php echo $n; ?></div>
+								<div class="col s12 m12 square node blockcontent"><?php echo $n; ?></div>
 							
 						</div>
 
@@ -689,23 +690,21 @@ $nextEpoch = gmdate("H:i:s", $timeLeft);
 						<!-- CHAIN HEIGHT -->
 						<div class="col s3 m2">
 							
-							<div class="col s12 m12 square block">
-								<a href="<?php echo $shelley . '/' . $nodes['lastBlockHash']; ?>" target="_blank"><?php echo $nodes['lastBlockHeight']; ?></a>
-							</div>
+							<div class="col s12 m12 square block blockcontent"><?php echo $nodes['lastBlockHeight']; ?></div>
 						
 						</div>
 
 						<!-- PEERS -->
 						<div class="col m2 hide-on-small-only">
 							
-							<div class="col m12 square block content"><?php echo $nodes['numberOfPeers']; ?></div>
+							<div class="col m12 square block blockcontent"><?php echo $nodes['numberOfPeers']; ?></div>
 							
 						</div>
 
 						<!-- UPTIME -->
 						<div class="col m2 hide-on-small-only">
 							
-							<div class="col m12 square block content"><?php echo $nodes['uptime']; ?></div>
+							<div class="col m12 square block blockcontent"><?php echo $nodes['uptime']; ?></div>
 							
 						</div>
 					</div>
