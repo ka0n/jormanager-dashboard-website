@@ -47,5 +47,6 @@ DdzFFzCqrhsimosXs37Lz1aGs3pbYjD3CzLuQYUagnTzT3GjK9vvrdxsArDBgHT1BNnGqCht4aMRango
 
 ### CHANGE LOG:
 
+* 022820: Layout: Support for CSS themes introduced. 
 * 022720: Layout: Fixed formatting for when no data was available during bootstrap.
 * 022020: Bug fix: Epoch was showing wrong number.
