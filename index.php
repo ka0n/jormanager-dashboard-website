@@ -174,7 +174,7 @@ $chainHeight 	= $pooltoolJSON['majoritymax'];
 
 
 // DATE 
-if (substr($localStatsJSON['lastBlockDate'], 0,2) <= "99") {
+if (substr($localStatsJSON['lastBlockDate'], 0,2) >= "99") {
 	$currentEpoch 	= substr($localStatsJSON['lastBlockDate'], 0,2);
 }
 else {
