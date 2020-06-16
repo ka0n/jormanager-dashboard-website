@@ -15,13 +15,13 @@
 
 // POOL SETTINGS
 // CUSTOMIZE THIS SECTION
-$poolFees 			= "0";
-$poolTax 			= "2";
-$poolID				= "bd190d24622cf29094149258431fe5f8d06b810e649325c176356dbf95970422";
+$poolFees 			= "0.1";
+$poolTax 			= "1";
+$poolID				= "dfa5bd638b3725796a8479dc05d11855d7cab84e55b2d5f0d6ce38bd634cb39a";
 $networkType		= "SHELLEY ITN";
-$poolTax			= "2%";
-$poolFees			= "0";
-$poolTicker			= "COCO";
+$poolTax			= "1%";
+$poolFees			= "0.1";
+$poolTicker			= "ABI";
 
 // CSS THEME
 $theme 				= "classic"; // options: classic, flatty, frenchy, modern
@@ -31,14 +31,14 @@ $poolTwitter		= "COCONUT_POOL";
 $poolTelegramChan	= "COCONUTPOOLSTAKERSLOUNGE";
 
 // POOL NAME
-$siteTitle			= "COCONUT POOL";
+$siteTitle			= "ABIHABI POOL";
 $siteSlogan			= "A Cardano ADA Stake Pool";
 
 // API PORT
-$apiPort			= "5000";
+$apiPort			= "3300";
 
 // YOUR DOMAIN NAME
-$fqdn				= "coconutpool.com";
+$fqdn				= "cardano.abihabi.com";
 
 // CREATED BY JORMANAGER
 // SET PATH, DO NOT START WITH A "/" 
